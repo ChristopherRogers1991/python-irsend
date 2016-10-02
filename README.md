@@ -17,6 +17,6 @@ It makes use of [subprocess](https://docs.python.org/2/library/subprocess.html)
 to call irsend. No attempts are made to handle errors (e.g. irsend not being
 installed, or lircd not running), and instead leaves those to the caller. See
 the documentation for subprocess (specifically
-[check_call](https://docs.python.org/2/library/subprocess.html#subprocess.call) and
+[check_call](https://docs.python.org/2/library/subprocess.html#subprocess.check_call) and
 [check_output](https://docs.python.org/2/library/subprocess.html#subprocess.check_output)
 to determine which exceptions may be raised.
