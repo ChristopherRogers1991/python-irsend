@@ -150,7 +150,7 @@ def set_transmitters(transmitters, count=None, device=None, address=None):
 
     Parameters
     ----------
-    transmitters: iterable
+    transmitters: iterable yielding ints
     count: int
     device: str
     address: str
@@ -161,5 +161,5 @@ def set_transmitters(transmitters, count=None, device=None, address=None):
     for subprocess.check_call to see the types of exceptions it may raise.
 
     """
-    args = ['set_transmitters', ' '.join(transmitters)]
+    args = ['set_transmitters'] + [str(i) for i in transmitters]
     _call(args, count, device, address)
