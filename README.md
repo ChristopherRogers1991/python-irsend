@@ -2,10 +2,16 @@
 
 This is a simple wrapper for [lirc's irsend](http://www.lirc.org/html/irsend.html).
 
+## Install:
+
+```
+pip install py_irsend
+```
+
 ## Basic Usage:
 
 ```
->>> from irsend import irsend
+>>> from py_irsend import irsend
 >>> irsend.list_remotes()
 ['lasko_heater', 'lights.conf', 'dynex_tv', 'logitech_z906', 'sabrent_hdmi_switch']
 >>> irsend.list_codes('logitech_z906')
