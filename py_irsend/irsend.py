@@ -23,9 +23,17 @@ import subprocess
 EXECUTABLE = 'irsend'
 
 
-def list_remotes():
+def list_remotes(device=None, address=None):
     """
     List the available remotes.
+
+    All parameters are passed to irsend. See the man page for irsend
+    for details about their usage.
+
+    Parameters
+    ----------
+    device: str
+    address: str
 
     Returns
     -------
@@ -37,18 +45,23 @@ def list_remotes():
     for subprocess.check_output to see the types of exceptions it may raise.
 
     """
-    output = subprocess.check_output([EXECUTABLE, "list", "", ""], stderr=subprocess.STDOUT)
+    output = _call(["list", "", ""], None, device, address)
     remotes = [l.split()[-1] for l in output.splitlines()]
     return remotes
 
 
-def list_codes(remote):
+def list_codes(remote, device=None, address=None):
     """
     List the codes for a given remote.
+
+    All parameters are passed to irsend. See the man page for irsend
+    for details about their usage.
 
     Parameters
     ----------
     remote: str
+    device: str
+    address: str
 
     Returns
     -------
@@ -60,7 +73,7 @@ def list_codes(remote):
     for subprocess.check_output to see the types of exceptions it may raise.
 
     """
-    output = subprocess.check_output([EXECUTABLE, "list", remote, ""], stderr=subprocess.STDOUT)
+    output = _call(["list", remote, ""], None, device, address)
     codes = [l.split()[-1] for l in output.splitlines()]
     return codes
 
@@ -73,7 +86,7 @@ def _call(args, count=None, device=None, address=None):
     if address:
         args += ['-a', address]
 
-    subprocess.check_call([EXECUTABLE] + args)
+    return subprocess.check_output([EXECUTABLE] + args, stderr=subprocess.STDOUT)
 
 
 def send_once(remote, codes, count=None, device=None, address=None):
@@ -99,7 +112,7 @@ def send_once(remote, codes, count=None, device=None, address=None):
     _call(args, count, device, address)
 
 
-def send_start(remote, code, count=None, device=None, address=None):
+def send_start(remote, code, device=None, address=None):
     """
     All parameters are passed to irsend. See the man page for irsend
     for details about their usage.
@@ -108,7 +121,6 @@ def send_start(remote, code, count=None, device=None, address=None):
     ----------
     remote: str
     code: str
-    count: int
     device: str
     address: str
 
@@ -119,10 +131,10 @@ def send_start(remote, code, count=None, device=None, address=None):
 
     """
     args = ['send_start', remote, code]
-    _call(args, count, device, address)
+    _call(args, device, address)
 
 
-def send_stop(remote, code, count=None, device=None, address=None):
+def send_stop(remote, code, device=None, address=None):
     """
     All parameters are passed to irsend. See the man page for irsend
     for details about their usage.
@@ -131,7 +143,6 @@ def send_stop(remote, code, count=None, device=None, address=None):
     ----------
     remote: str
     code: str
-    count: int
     device: str
     address: str
 
@@ -142,10 +153,10 @@ def send_stop(remote, code, count=None, device=None, address=None):
 
     """
     args = ['send_stop', remote, code]
-    _call(args, count, device, address)
+    _call(args, None, device, address)
 
 
-def set_transmitters(transmitters, count=None, device=None, address=None):
+def set_transmitters(transmitters, device=None, address=None):
     """
     All parameters are passed to irsend. See the man page for irsend
     for details about their usage.
@@ -153,7 +164,6 @@ def set_transmitters(transmitters, count=None, device=None, address=None):
     Parameters
     ----------
     transmitters: iterable yielding ints
-    count: int
     device: str
     address: str
 
@@ -164,4 +174,4 @@ def set_transmitters(transmitters, count=None, device=None, address=None):
 
     """
     args = ['set_transmitters'] + [str(i) for i in transmitters]
-    _call(args, count, device, address)
+    _call(args, None, device, address)
