@@ -8,7 +8,7 @@ with open(path.join(package_dir, 'README.md')) as readme:
 
 setup(
     name='py_irsend',
-    version='0.1.0',
+    version='1.0.0',
     packages=['py_irsend'],
     url='https://github.com/ChristopherRogers1991/python-irsend',
     license='GPLv3',

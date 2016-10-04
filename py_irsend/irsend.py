@@ -105,7 +105,7 @@ def send_once(remote, codes, count=None, device=None, address=None):
     Notes
     -----
     No attempt is made to catch or handle errors. See the documentation
-    for subprocess.check_call to see the types of exceptions it may raise.
+    for subprocess.check_output to see the types of exceptions it may raise.
 
     """
     args = ['send_once', remote] + codes
@@ -127,7 +127,7 @@ def send_start(remote, code, device=None, address=None):
     Notes
     -----
     No attempt is made to catch or handle errors. See the documentation
-    for subprocess.check_call to see the types of exceptions it may raise.
+    for subprocess.check_output to see the types of exceptions it may raise.
 
     """
     args = ['send_start', remote, code]
@@ -149,7 +149,7 @@ def send_stop(remote, code, device=None, address=None):
     Notes
     -----
     No attempt is made to catch or handle errors. See the documentation
-    for subprocess.check_call to see the types of exceptions it may raise.
+    for subprocess.check_output to see the types of exceptions it may raise.
 
     """
     args = ['send_stop', remote, code]
@@ -170,7 +170,7 @@ def set_transmitters(transmitters, device=None, address=None):
     Notes
     -----
     No attempt is made to catch or handle errors. See the documentation
-    for subprocess.check_call to see the types of exceptions it may raise.
+    for subprocess.check_output to see the types of exceptions it may raise.
 
     """
     args = ['set_transmitters'] + [str(i) for i in transmitters]
