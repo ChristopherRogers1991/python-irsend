@@ -46,7 +46,7 @@ def list_remotes(device=None, address=None):
 
     """
     output = _call(["list", "", ""], None, device, address)
-    remotes = [l.split()[-1] for l in output.splitlines()]
+    remotes = _output_to_list(output)
     return remotes
 
 
@@ -74,7 +74,7 @@ def list_codes(remote, device=None, address=None):
 
     """
     output = _call(["list", remote, ""], None, device, address)
-    codes = [l.split()[-1] for l in output.splitlines()]
+    codes = _output_to_list(output)
     return codes
 
 
@@ -87,6 +87,11 @@ def _call(args, count=None, device=None, address=None):
         args += ['-a', address]
 
     return subprocess.check_output([EXECUTABLE] + args, stderr=subprocess.STDOUT)
+
+def _output_to_list(output):
+    lines = output.splitlines()
+    lines = filter(lambda line: line != '', lines)
+    return [line.split()[-1] for line in lines]
 
 
 def send_once(remote, codes, count=None, device=None, address=None):
