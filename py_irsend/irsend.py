@@ -46,7 +46,7 @@ def list_remotes(device=None, address=None):
 
     """
     output = _call(["list", "", ""], None, device, address)
-    remotes = [l.split()[-1] for l in output.splitlines()]
+    remotes = [l.split()[-1] for l in output.splitlines() if l]
     return remotes
 
 
@@ -74,7 +74,7 @@ def list_codes(remote, device=None, address=None):
 
     """
     output = _call(["list", remote, ""], None, device, address)
-    codes = [l.split()[-1] for l in output.splitlines()]
+    codes = [l.split()[-1] for l in output.splitlines() if l]
     return codes
 
 
