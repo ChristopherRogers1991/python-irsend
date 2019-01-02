@@ -16,6 +16,7 @@ setup(
     author_email='ChristopherRogers1991@gmail.com',
     description="A simple wrapper for lirc's irsend. ",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     keywords='lirc irsend',
     classifiers=[
         'Development Status :: 4 - Beta',
