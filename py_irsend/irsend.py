@@ -131,7 +131,7 @@ def send_start(remote, code, device=None, address=None):
 
     """
     args = ['send_start', remote, code]
-    _call(args, device, address)
+    _call(args, None, device, address)
 
 
 def send_stop(remote, code, device=None, address=None):
